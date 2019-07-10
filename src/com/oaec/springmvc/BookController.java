@@ -51,4 +51,11 @@ public class BookController {
         return "{\"success\":"+b+"}";
     }
 
+    @DeleteMapping(value = "/book/{id}",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String delete(@PathVariable Integer id){
+        boolean b = bookService.delete(id);
+        return "{\"success\":"+b+"}";
+    }
+
 }

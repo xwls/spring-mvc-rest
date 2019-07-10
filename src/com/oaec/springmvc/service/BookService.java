@@ -12,4 +12,6 @@ public interface BookService {
 
     boolean saveOrUpdate(Book book);
 
+    boolean delete(Integer id);
+
 }

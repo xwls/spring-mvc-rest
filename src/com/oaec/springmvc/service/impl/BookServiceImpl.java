@@ -36,4 +36,9 @@ public class BookServiceImpl implements BookService {
         }
         return result == 1;
     }
+
+    @Override
+    public boolean delete(Integer id) {
+        return bookDao.doDelete(id) == 1;
+    }
 }

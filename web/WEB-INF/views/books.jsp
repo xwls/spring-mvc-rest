@@ -6,6 +6,27 @@
     <title>图书列表</title>
     <link rel="stylesheet" href="${path}/static/css/bootstrap.min.css"/>
     <script type="text/javascript" src="${path}/static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        function del(e) {
+            var tr = $(e).parent().parent();
+            var id = tr.children(":first").text();
+            $.ajax({
+                url:"${path}/book/"+id,
+                type:"post",
+                data:{
+                    _method:"delete"
+                },
+                success:function (res) {
+                    if(res.success){
+                        //删除tr
+                        tr.remove();
+                    }else {
+                        alert("失败");
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body class="container">
     <h1>图书列表</h1>
@@ -26,7 +47,7 @@
                 <td>${book.price}</td>
                 <td>
                     <a class="btn btn-sm btn-primary" href="${path}/book/${book.bookId}">修改</a>
-                    <a class="btn btn-sm btn-danger" href="#">删除</a>
+                    <a class="btn btn-sm btn-danger" href="javascript:void (0)" onclick="del(this)">删除</a>
                 </td>
             </tr>
         </c:forEach>
