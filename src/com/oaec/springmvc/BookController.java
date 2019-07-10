@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -22,6 +25,25 @@ public class BookController {
         System.out.println(JSON.toJSONString(books));
         model.addAttribute("books",books);
         return "books";
+    }
+
+    @GetMapping("/book")
+    public String addForm(){
+        return "form";
+    }
+
+    @GetMapping("/book/{id}")
+    public String editForm(@PathVariable Integer id, Model model){
+        Book book = bookService.getBook(id);
+        model.addAttribute("book",book);
+        return "form";
+    }
+
+    @PostMapping(value = "/book",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String save(Book book){
+        boolean b = bookService.saveOrUpdate(book);
+        return "{\"success\":"+b+"}";
     }
 
 }

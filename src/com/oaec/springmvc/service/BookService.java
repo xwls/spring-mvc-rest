@@ -8,4 +8,8 @@ public interface BookService {
 
     List<Book> books();
 
+    Book getBook(Integer bookId);
+
+    boolean saveOrUpdate(Book book);
+
 }
