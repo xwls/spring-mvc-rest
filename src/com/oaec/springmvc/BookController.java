@@ -6,10 +6,7 @@ import com.oaec.springmvc.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +39,14 @@ public class BookController {
     @PostMapping(value = "/book",produces = "application/json;charset=utf-8")
     @ResponseBody
     public String save(Book book){
+        boolean b = bookService.saveOrUpdate(book);
+        return "{\"success\":"+b+"}";
+    }
+
+    @PutMapping(value = "/book",produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String update(Book book){
+        System.out.println("put-book = " + book);
         boolean b = bookService.saveOrUpdate(book);
         return "{\"success\":"+b+"}";
     }

@@ -23,7 +23,7 @@
                         if(res.success){
                             location = "${path}/books";
                         }else{
-                            alert("添加失败");
+                            alert("失败");
                         }
                     }
                 });
@@ -42,6 +42,7 @@
     <form id="book-form" role="form" action="" method="post">
         <c:if test="${requestScope.book != null}">
             <input type="hidden" name="bookId" value="${requestScope.book.bookId}">
+            <input type="hidden" name="_method" value="put">
         </c:if>
         <div class="form-group">
             <label for="name">名称</label>
